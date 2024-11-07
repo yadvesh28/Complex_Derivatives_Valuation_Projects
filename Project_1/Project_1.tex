@@ -1,75 +1,144 @@
-\documentclass[12pt]{article}
+\documentclass[12pt,a4paper]{article}
 \usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
 \usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{xcolor}
-\usepackage{booktabs}
-\usepackage{graphicx}
-\usepackage{array}
-\usepackage{multirow}
-\usepackage{geometry}
 \usepackage{hyperref}
-\usepackage{times}
+\usepackage[
+    top=1cm,
+    bottom=1cm,
+    left=0.8in,
+    right=0.8in,
+    includeheadfoot,
+    heightrounded
+]{geometry}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{array}
+\usepackage{adjustbox} % Allows adjusting table to fit within margins
 
-% Set page margins - adjusted to match PDF
-\geometry{
-    top=1in,
-    bottom=1in,
-    left=1in,
-    right=1in,
-    bindingoffset=0in
-}
+% Define new column type for better spacing
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
 
-% Document begins
+% Define American Blue color (RGB: 0, 71, 171)
+\definecolor{americanblue}{RGB}{0,71,171}
+\definecolor{headerblue}{RGB}{0,157,224}  % Bright blue for header
+\definecolor{lightblue}{RGB}{217,241,255} % Light blue for alternate rows
+
 \begin{document}
 
-% Title without \maketitle - matches PDF format
-{\large \textbf{UBS AG Trigger Autocallable Contingent Yield Notes linked to the common stock of}\\
-\textbf{U.S. Bancorp due August 13, 2026}}
+\begin{center}
+{\color{americanblue}\Large\textbf{UBS AG \$4,593,000 Trigger Callable Contingent Yield Notes\\[0.05cm]
+Linked to the common stock of U.S. Bancorp due August 13, 2026}
+
+\vspace{0.2cm}
+\small{\it -Valuation report by Yadvesh, Krish and Mayank}}
+\end{center}
+
+\vspace{1ex}
+
+\section*{(I) Introduction}
+
+This report aims to value the UBS AG \underline{Trigger Callable Contingent Yield} Notes, which are linked to the common stock of U.S. Bancorp due on August 13, 2026. According to our valuation methods, we estimate the value of the note to be \$X.
 
 \vspace{0.5cm}
 
-\textbf{Introduction}\\
-This study aims to determine the value of Bancorp's common stock, UBS AG Trigger Autocallable Contingent Yield Notes, which is due on August 13, 2026. According to our estimation, the note in question is worth \textbf{X}.
+\underline{\textbf{1) Below are the Key Dates of the Note:}}
 
-\vspace{0.3cm}
-\textbf{Key Dates}\\
-\begin{tabular}{ll}
-Trade Date & August 8, 2024 \\
-Settlement Date & August 13, 2024 \\
-Observation Dates & Quarterly (callable after 6 months) \\
-Final Valuation Date & August 10, 2026 \\
-Maturity Date & August 13, 2026 \\
-\end{tabular}
-
-\vspace{0.3cm}
-% Single comprehensive table for asset details - matches PDF format
-\begin{tabular}{|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|p{1.5cm}|}
+\begin{center}
+\renewcommand{\arraystretch}{1.3}  % Increase row height
+\begin{tabular}{|C{0.45\textwidth}|C{0.45\textwidth}|}  % Ensuring full borders for all cells
 \hline
-\textbf{Under-lying Asset} & \textbf{Bloom-berg Ticker} & \textbf{Contin-gent Coupon Rate} & \textbf{Initial Level} & \textbf{Call Thres-hold Level} & \textbf{Coupon Barrier} & \textbf{Down-side Thres-hold} & \textbf{CUSIP} & \textbf{ISIN} \\
+\multicolumn{2}{|c|}{\cellcolor{headerblue}\color{white}\textbf{Key Dates}} \\
 \hline
-U.S. Bancorp & USB & 10.25\% p.a & \$41.76 & \$41.76, which is 100.00\% of the Initial Level & \$25.06 (60.00\% of the Initial Level) & \$25.06, (60.00\% of the Initial Level) & 90307DZW5 & US90307DZW54 \\
+\textbf{Trade Date (T\textsubscript{0})} & August 8, 2024 \\
+\hline
+\textbf{Settlement Date (T\textsubscript{1})} & August 13, 2024 \\
+\hline
+\rowcolor{lightblue}\textbf{Observation Dates} & Quarterly (first available after 6 months) \\
+\hline
+\textbf{Final Valuation Date (T\textsubscript{2})} & August 10, 2026 \\
+\hline
+\rowcolor{lightblue}\textbf{Maturity Date (T\textsubscript{3})} & August 13, 2026 \\
 \hline
 \end{tabular}
+\end{center}
 
-\vspace{0.3cm}
-% Two-column observation dates table - matches PDF format
-\begin{tabular}{|l|l|}
+\vspace{0.5cm}
+
+\underline{\textbf{2) Below are the Note Offering:}}
+
+\begin{center}
+\begin{adjustbox}{width=1.2\textwidth,center}  % Allow table to exceed page width if necessary
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|C{3.5cm}|C{2.5cm}|C{3cm}|C{2.5cm}|C{3cm}|C{3cm}|C{3cm}|C{3cm}|}
 \hline
-\textbf{Observation Dates} & \textbf{Coupon Payment Dates} \\
+\multicolumn{8}{|c|}{\cellcolor{headerblue}\color{white}\textbf{Underlying Asset Details}} \\
+\hline
+\cellcolor{lightblue}\textbf{Underlying Asset} & \cellcolor{lightblue}\textbf{Bloomberg Ticker} & \cellcolor{lightblue}\textbf{Contingent Coupon Rate} & \cellcolor{lightblue}\textbf{Initial Level} & \cellcolor{lightblue}\textbf{Coupon Barrier} & \cellcolor{lightblue}\textbf{Downside Threshold} & \cellcolor{lightblue}\textbf{Share Delivery Amount} & \cellcolor{lightblue}\textbf{CUSIP / ISIN} \\
+\hline
+Common stock of U.S. Bancorp & USB & 10.25\% per annum & \$41.76 & \$25.06, which is 60.00\% of the initial level & \$25.06, which is 60.00\% of the initial level & 23.9464 shares per Note & 90307DZW5 / US90307DZW54 \\
+\hline
+\end{tabular}
+\end{adjustbox}
+\end{center}
+
+\vspace{0.5cm}
+
+\underline{\textbf{3) Below are the Observation Dates and Coupon Payment Dates:}}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}  % Increase row height
+\begin{tabular}{|C{0.45\textwidth}|C{0.45\textwidth}|}
+\hline
+\multicolumn{2}{|c|}{\cellcolor{headerblue}\color{white}\textbf{Observation Dates and Coupon Dates}} \\
+\hline
+\cellcolor{lightblue}\textbf{Observation Dates} & \cellcolor{lightblue}\textbf{Coupon Dates} \\
 \hline
 November 8, 2024 & November 13, 2024 \\
+\hline
 February 10, 2025 & February 13, 2025 \\
-May 8, 2025 & May 13, 2025 \\
+\hline
+\rowcolor{lightblue}May 8, 2025 & May 13, 2025 \\
+\hline
 August 8, 2025 & August 13, 2025 \\
-November 10, 2025 & November 13, 2025 \\
+\hline
+\rowcolor{lightblue}November 10, 2025 & November 13, 2025 \\
+\hline
 February 9, 2026 & February 12, 2026 \\
-May 8, 2026 & May 13, 2026 \\
+\hline
+\rowcolor{lightblue}May 8, 2026 & May 13, 2026 \\
+\hline
 Final Valuation Date & Maturity Date \\
 \hline
 \end{tabular}
+\end{center}
 
-[Rest of your document content remains the same...]
+\vspace{0.5cm}
+
+\underline{\textbf{4) Some important characteristics of the note are:}}
+\begin{enumerate}
+\item The note has just one underlying asset i.e. the common stock of U.S. Bancorp (USB). 
+\item On any observation date (beginning after 6 months) other than the final valuation date, UBS may elect to call the Notes and will pay a cash payment per Note equal to the principal amount plus any contingent coupon otherwise due on the call settlement date, and no further payments or deliveries will be made on the Notes
+\item A contingent coupon is payable on a coupon payment date if the closing level of the underlying asset is equal to or greater than the coupon barrier(60\% of initial level) on the applicable observation date (including the final valuation date) and no contingent coupon will be paid if the closing level of the underlying asset is less than the coupon barrier(60\% of initial level) on the applicable observation date.
+\item Contingent Repayment of Principal Amount at Maturity with Potential for Full Downside Market Exposure:
+	\begin{enumerate}
+	\item UBS will pay a cash payment equal to Principal Amount of(\$1,000) if UBS does not elect to call the Notes and the final level is equal to or greater than the downside 			threshold (60\% of initial level).
+	\item UBS will deliver a number of shares of the underlying asset (with cash paid in lieu of any fractional share), equal to \underline{\textit{Share Delivery Amount*}}
+	\end{enumerate}
+\end{enumerate}
+{\small \textit{*Note: Share Delivery Amount (per Note)\\
+A number of shares of the underlying asset equal to the quotient of (i) the principal amount divided by (ii) the initial level, rounded to the nearest ten thousandth of one share, as specified on the cover hereof. Any fractional share included in the share delivery amount will be paid in cash at an amount equal to the product of the fractional share and the final level. For the avoidance of doubt, if the share delivery amount is less than 1.0000, at maturity you will receive an amount in cash per Note, if anything, equal to the product of the share delivery amount and the final level.}}
+
+\section*{(II) Approach}
+
+The value of the note in our model has been determined using a \_\_\_\_\_\_\_\_-step binomial model. Since we are aware of the valuation errors that can occur in a binomial model, we have taken the following actions:
+\begin{enumerate}
+    \item Employed a binomial tree with \_\_\_\_\_\_ steps, which is sufficiently large to reduce the error.
+    \item Determined the note's value using the Cox, Ross, \& Rubinstein (CRR) technique. This method allows us to include intricate note properties with flexibility. Additional models will be covered in the report's following sections.
+\end{enumerate}
+
+We are aware that even with these precautions, non-linearity errors will exist in the value, mostly because of payments associated with discrete time intervals (the note's autocallable and contingent coupon feature). To ensure that our values are comparable to those provided by other, occasionally more complex models of the binomial method of option valuation, we shall discuss the values obtained from other models.
+
+To ensure the accuracy of our numbers, we have taken data from Bloomberg, a trustworthy source, for the dynamic components of our model. We took the OIS rate (instead of the risk-free rate), dividend yields, and implied volatilities from Bloomberg. The date ranges and moneyness are shown in the screenshots below for your understanding.
+
 
 \end{document}
