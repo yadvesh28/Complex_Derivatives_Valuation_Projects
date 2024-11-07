@@ -1,0 +1,139 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{fontspec}
+\usepackage{hyperref}
+
+% Set Cambria as the main font
+\setmainfont{Cambria}
+
+% Define colors
+\definecolor{ubsblue}{RGB}{0, 82, 156}
+\definecolor{darkgray}{RGB}{51, 51, 51}
+
+% Document settings
+\title{\textcolor{ubsblue}{\textbf{UBS AG \$4,593,000 Trigger Callable Contingent Yield Notes}\\
+\textbf{Linked to the common stock of U.S. Bancorp due August 13, 2026}}}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section*{(I) Introduction}
+This study aims to determine the value of Bancorp's common stock, UBS AG Trigger Autocallable Contingent Yield Notes, which is due on August 13, 2026. According to our estimation, the note in question is worth \textbf{X}.
+
+\subsection*{Key Dates}
+\begin{table}[h]
+\begin{tabular}{ll}
+\toprule
+Trade Date & August 8, 2024 \\
+Settlement Date & August 13, 2024 \\
+Observation Dates & Quarterly (callable after 6 months) \\
+Final Valuation Date & August 10, 2026 \\
+Maturity Date & August 13, 2026 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% Asset Details Table
+\begin{table}[h]
+\small
+\begin{tabular}{p{2cm}p{1.5cm}p{1.5cm}p{1.5cm}p{1.5cm}p{1.5cm}p{1.5cm}p{1.5cm}p{2cm}}
+\toprule
+Underlying Asset & Bloomberg Ticker & Contingent Coupon Rate & Initial Level & Coupon Barrier & Downside Threshold & Share Delivery Amount & CUSIP & ISIN \\
+\midrule
+Common stock of U.S. Bancorp & USB & 10.25\% per annum & \$41.76 & \$25.06 (60.00\% of initial level) & \$25.06 (60.00\% of initial level) & 23.9464 shares per Note & 90307DZW5 & US90307DZW54 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% Observation and Coupon Dates Table
+\begin{table}[h]
+\begin{tabular}{ll}
+\toprule
+Observation Dates & Coupon Dates \\
+\midrule
+November 8, 2024 & November 13, 2024 \\
+February 10, 2025 & February 13, 2025 \\
+May 8, 2025 & May 13, 2025 \\
+August 8, 2025 & August 13, 2025 \\
+November 10, 2025 & November 13, 2025 \\
+February 9, 2026 & February 12, 2026 \\
+May 8, 2026 & May 13, 2026 \\
+Final Valuation Date & Maturity Date \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section*{(II) Approach}
+The value of the note in our model has been determined using a \_\_\_\_\_\_\_\_\_\_-step binomial model. 
+
+\section*{(III) Final Valuation}
+We have determined that the note's value is \_\_\_\_\_\_ by applying the CRR approach.
+
+\section*{(IV) Valuation Model}
+
+\subsection*{a) Estimating parameters (u, d, and q) to construct of the binomial tree}
+Assuming no arbitrage, we estimate the value of the instrument using risk-neutral probabilities discounted at the risk-free rate. We have used the Cox, Ross and Rubenstein (CRR) model to determine the size of the up (u) and down (d) movements where:
+
+\begin{equation}
+u = e^{\sigma\sqrt{\Delta t}} \text{ and } d = \frac{1}{u}
+\end{equation}
+
+The risk-neutral probabilities (q and 1 -- q) are given by:
+
+\begin{equation}
+q = \frac{e^{r\Delta t} - d}{u - d} \text{ and } 1-q = \frac{u - e^{r\Delta t}}{u - d}
+\end{equation}
+
+where r is the OIS rate and $\sigma$ is the implied volatility.
+
+\subsection*{Assumptions:}
+In the risk-neutral world:
+\begin{itemize}
+\item All assets have an expected return equal to the risk-free rate: E[S_t] = S_0e^{rt}
+\item Variance of returns = $\sigma^2t$ over a period t
+\item The underlying asset's returns are normally distributed over a period t with:
+\begin{equation}
+\text{mean} = \left(r - \frac{\sigma^2}{2}\right)t \text{ and variance} = \sigma^2t
+\end{equation}
+\begin{equation}
+r_t \sim N\left(\left(r - 0.5\sigma^2\right)t, \sigma^2t\right)
+\end{equation}
+\end{itemize}
+
+\subsection*{b) Constructing the stock price tree}
+For a tree with N = \_\_\_\_\_\_\_ steps and $\tau$ = \_\_\_\_\_\_ years or \_\_\_\_\_ days:
+
+The stock price at each node is calculated as:
+\begin{equation}
+S_{i,j} = S_0u^jd^{i-j}
+\end{equation}
+
+\subsection*{c) Constructing the valuation tree using backward induction}
+The payoff at maturity is:
+\begin{equation}
+V_{T,j} = \begin{cases}
+\text{Principal Amount + Coupon} & \text{if } S_T \geq B \\
+\text{Principal Amount} \times (1 + \text{Underlying Return}) & \text{if } S_T < B
+\end{cases}
+\end{equation}
+
+At the final valuation date:
+\begin{equation}
+V_{\tau,j} = \begin{cases}
+(\text{Principal Amount + Coupon}) \times e^{r_{\tau,T}(T-\tau)} & \text{if } S_T \geq B \\
+\text{Principal Amount} \times (1 + \text{Underlying Return}) \times e^{r_{\tau,T}(T-\tau)} & \text{if } S_T < B
+\end{cases}
+\end{equation}
+
+% Continue with remaining sections...
+% Add figures and sensitivity analysis tables as needed
+
+\end{document}
