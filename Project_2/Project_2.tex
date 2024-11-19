@@ -1,0 +1,539 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage[
+    top=1cm,
+    bottom=0.7cm,
+    left=0.8in,
+    right=0.8in,
+    includeheadfoot,
+    heightrounded
+]{geometry}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{array}
+\usepackage{adjustbox} % Allows adjusting table to fit within margins
+\usepackage{graphicx}
+\usepackage{float}  % For [H] placement specifier
+\usepackage{subcaption}
+
+% Define new column type for better spacing
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+
+% Define American Blue color (RGB: 0, 71, 171)
+\definecolor{americanblue}{RGB}{0,71,171}
+\definecolor{headerblue}{RGB}{0,157,224}  % Bright blue for header
+\definecolor{lightblue}{RGB}{217,241,255} % Light blue for alternate rows
+
+\begin{document}
+
+
+\begin{center}
+{\color{americanblue}\Large\textbf{Callable Contingent Income Securities \\ due December 3, 2025}}
+
+\vspace{0.2cm}
+{\color{americanblue}\large\href{https://sec.gov/Archives/edgar/data/1666268/000183988223032004/ms75\_424b2-16958.htm}{SEC Filing Link to the Security}}
+
+\vspace{0.2cm}
+{\color{americanblue}\Large\textbf{Payments on the Securities Based on the Worst Performing of the Russell 2000\textsuperscript{\textregistered} Index\\and the S\&P 500\textsuperscript{\textregistered} Index}}
+
+\vspace{0.2cm}
+{\small{\it -Valuation report by Yadvesh, Krish and Mayank}}
+\end{center}
+
+\vspace{1ex}
+
+\section*{(I) Introduction}
+
+This report aims to value the UBS AG \underline{Trigger Callable Contingent Yield} Notes, which are linked to the common stock of U.S. Bancorp due on August 13, 2026. According to our valuation methods, we estimate the value of the note to be \underline{\textbf{\$973.42}}.
+
+
+
+\vspace{0.5cm}
+
+\underline{\textbf{1) Below are the Key Dates of the Note:}}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}  % Increase row height
+\begin{tabular}{|C{0.45\textwidth}|C{0.45\textwidth}|}  % Ensuring full borders for all cells
+\hline
+\multicolumn{2}{|c|}{\cellcolor{headerblue}\color{white}\textbf{Key Dates}} \\
+\hline
+\textbf{Trade Date (T\textsubscript{0})} & August 8, 2024 \\
+\hline
+\textbf{Settlement Date (T\textsubscript{1})} & August 13, 2024 \\
+\hline
+\rowcolor{lightblue}\textbf{Observation Dates} & Quarterly (first available after 6 months) \\
+\hline
+\textbf{Final Valuation Date (T\textsubscript{2})} & August 10, 2026 \\
+\hline
+\rowcolor{lightblue}\textbf{Maturity Date (T\textsubscript{3})} & August 13, 2026 \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+
+\underline{\textbf{2) Below are the Note Offering:}}
+
+\begin{center}
+\begin{adjustbox}{width=1.2\textwidth,center}  % Allow table to exceed page width if necessary
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|C{3.5cm}|C{2.5cm}|C{3cm}|C{2.5cm}|C{3cm}|C{3cm}|C{3cm}|C{3cm}|}
+\hline
+\multicolumn{8}{|c|}{\cellcolor{headerblue}\color{white}\textbf{Note Offering}} \\
+\hline
+\cellcolor{lightblue}\textbf{Underlying Asset} & \cellcolor{lightblue}\textbf{Bloomberg Ticker} & \cellcolor{lightblue}\textbf{Contingent Coupon Rate} & \cellcolor{lightblue}\textbf{Initial Level} & \cellcolor{lightblue}\textbf{Coupon Barrier} & \cellcolor{lightblue}\textbf{Downside Threshold} & \cellcolor{lightblue}\textbf{Share Delivery Amount} & \cellcolor{lightblue}\textbf{CUSIP / ISIN} \\
+\hline
+Common stock of U.S. Bancorp & USB & 10.25\% per annum & \$41.76 & \$25.06, which is 60.00\% of the initial level & \$25.06, which is 60.00\% of the initial level & 23.9464 shares per Note & 90307DZW5 / US90307DZW54 \\
+\hline
+\end{tabular}
+\end{adjustbox}
+\end{center}
+
+\vspace{0.5cm}
+
+\underline{\textbf{3) Below are the Observation Dates and Coupon Payment Dates:}}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}  % Increase row height
+\begin{tabular}{|C{0.45\textwidth}|C{0.45\textwidth}|}
+\hline
+\multicolumn{2}{|c|}{\cellcolor{headerblue}\color{white}\textbf{Observation Dates and Coupon Dates}} \\
+\hline
+\cellcolor{lightblue}\textbf{Observation Dates} & \cellcolor{lightblue}\textbf{Coupon Dates} \\
+\hline
+November 8, 2024 & November 13, 2024 \\
+\hline
+February 10, 2025 & February 13, 2025 \\
+\hline
+\rowcolor{lightblue}May 8, 2025 & May 13, 2025 \\
+\hline
+August 8, 2025 & August 13, 2025 \\
+\hline
+\rowcolor{lightblue}November 10, 2025 & November 13, 2025 \\
+\hline
+February 9, 2026 & February 12, 2026 \\
+\hline
+\rowcolor{lightblue}May 8, 2026 & May 13, 2026 \\
+\hline
+Final Valuation Date & Maturity Date \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+
+\underline{\textbf{4) Some important characteristics of the note are:}}
+\begin{enumerate}
+\item The note has just one underlying asset i.e. the common stock of U.S. Bancorp (USB). 
+\item On any observation date (beginning after 6 months) other than the final valuation date, UBS may elect to call the Notes and will pay a cash payment per Note equal to the principal amount plus any contingent coupon otherwise due on the call settlement date, and no further payments or deliveries will be made on the Notes
+\item A contingent coupon is payable on a coupon payment date if the closing level of the underlying asset is equal to or greater than the coupon barrier(60\% of initial level) on the applicable observation date (including the final valuation date) and no contingent coupon will be paid if the closing level of the underlying asset is less than the coupon barrier(60\% of initial level) on the applicable observation date.
+\item Contingent Repayment of Principal Amount at Maturity with Potential for Full Downside Market Exposure:
+	\begin{enumerate}
+	\item UBS will pay a cash payment equal to Principal Amount of(\$1,000) if UBS does not elect to call the Notes and the final level is equal to or greater than the downside 			threshold (60\% of initial level).
+	\item UBS will deliver a number of shares of the underlying asset (with cash paid in lieu of any fractional share), equal to \underline{\textit{Share Delivery Amount*}}
+	\end{enumerate}
+\end{enumerate}
+{\small \textit{*Note: Share Delivery Amount (per Note)\\
+A number of shares of the underlying asset equal to the quotient of (i) the principal amount divided by (ii) the initial level, rounded to the nearest ten thousandth of one share, as specified on the cover hereof. Any fractional share included in the share delivery amount will be paid in cash at an amount equal to the product of the fractional share and the final level. For the avoidance of doubt, if the share delivery amount is less than 1.0000, at maturity you will receive an amount in cash per Note, if anything, equal to the product of the share delivery amount and the final level.}}
+
+\vspace{0.5cm}
+
+\underline{\textbf{5) Payoff at Maturity of the Note is:}}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth, height=0.3\textheight]{Images/payoff_project_1.png}
+    \caption{Payoff at Maturity}
+    \label{fig:yourlabel}
+\end{figure}
+
+\clearpage  % Force a page break before the Approach section
+
+
+\section*{(II) Input Data Characteristics:}
+\begin{enumerate}
+\item \underline{\textbf{Risk-Free Rate (OIS):}}
+	\begin{itemize}
+	\item  OIS rates are based on overnight lending rates which have very low credit risk. OIS closely tracks the central bank's target rates and the OIS market is typically very liquid so we use OIS as a proxy from risk-free rates. However, OIS rate is based on very short-term rates, which may not fully capture the term structure of interest rates for longer-dated instruments.
+	\item For our Project we had to Linearly Interpolate the Discount Factors to get the continuously compounded Risk-free rate r(0,T\textsubscript{1}) for Settlement Date(T\textsubscript{1}) and  r(0, T\textsubscript{3}) for Maturity Date(T\textsubscript{3}) respectively. The calculated values were r(0,T\textsubscript{1}) = \textbf{5.383127\%} and r(0,T\textsubscript{3}) = \textbf{3.717961\%}
+	\item After Linear interpolationand rate calculation we had to figure out the forward rate F(T\textsubscript{1}, T\textsubscript{3}) from Settlement Date(T\textsubscript{1}) to Maturity Date(T\textsubscript{3}) which would be used for discounting. Also, r(0,T\textsubscript{2}) will be used for probability measure q calculation.
+	\item The final Values for  r(0,T\textsubscript{2})  for probability measure q calculation is r(0,T\textsubscript{2}) = \textbf{3.720811\%} and  F(T\textsubscript{1}, T\textsubscript{3}) for discounting  F(T\textsubscript{1}, T\textsubscript{3}) = \textbf{3.706556\%}
+	\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth, height=0.3\textheight]{Images/usd-ois.png}
+    \caption{USD OIS at 08/08/2024}
+    \label{fig:yourlabel}
+\end{figure}
+\item \underline{\textbf{Implied Volatility Matrix:}}
+	\begin{itemize}
+	\item  The Implied Volatility Matrix is used extensively in options pricing to gauge the volatility across different strike prices (moneyness) and maturities. It provides a real-time snapshot of volatility expectations. However, if the market is illiquid, the matrix may not reflect accurate volatility estimates, especially for less popular strikes or distant expirations.
+	\item For our Project since the Note we are valuing approximately matures in 2 Years so we used 24M Volatilites from the Volatility-Matrix at different Moneyness from 60 till 100 to gauge the sensitivity of Note Valuation on different volatilities.
+	\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.1\textwidth, height=0.23\textheight]{Images/vols.png}
+    \caption{Implied Volatility Matrix for USB at 08/08/2024}
+    \label{fig:yourlabel}
+\end{figure}
+\item \underline{\textbf{Continuous Dividend Yield:}}
+	\begin{itemize}
+	\item  Including the dividend yield allows for a more accurate representation of the underlying asset’s price trajectory over time. However, for stocks with fluctuating dividend payments, using a fixed yield can misrepresent expected returns.
+	\item For our Project we used a continuous dividend yield of D = \textbf{4.842\%} 
+	\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth, height=0.3\textheight]{Images/div.png}
+    \caption{Dividend Yield for USB at 08/08/2024}
+    \label{fig:yourlabel}
+\end{figure}
+\end{enumerate}
+
+\section*{(III) Methodology}
+
+We have conducted the valuation of the note using a 9999-step binomial tree, implementing three different methodologies within this framework: the Cox, Ross, \& Rubinstein (CRR) method, Rendleman and Bartter (RB) method and the Leisen-Reimer (LR) method. As the note includes features like Issuer Callable and Contingent coupons at discrete observation dates, this introduces path dependency in the note valuation and if we employ the traditional Cox, Ross, \& Rubinstein (CRR) and Rendleman and Bartter (RB) Binomial Lattices, this can introduce non-linearity errors into the valuation. To account for this we have finally chosen Leisen-Reimer (LR) Binomial lattice that diminishes these non-linearity errors along with this we also employed 9999 time-steps to ensure that we have a sufficiently large framework which minimizes other errors in valuation and the final Note value smoothly converges with least errors.\\\\
+The Binomial lattice methods used follow the below equations to calculate the probability measure q:
+\begin{itemize}
+    \item Cox, Ross and Rubinstein, 1979, CRR $\implies$ $(u = e^{\sigma\Delta t}, d = 1/u)$
+    
+    \item Rendleman and Bartter, 1979, RB $\implies$ $(u = \exp((r - \delta - 0.5\sigma^2)\Delta t + \sigma\sqrt{\Delta t}), \\ d = \exp((r - \delta - 0.5\sigma^2)\Delta t - \sigma\sqrt{\Delta t}))$
+    
+    \item Leisen and Reimer, 1996, LR $\implies$
+    \begin{itemize}
+        \item $q = h(d_2)$
+        \item $u = e^{(r-\delta)\Delta t}\frac{q^*}{q}$
+        \item $d = \frac{e^{(r-\delta)\Delta t} - qu}{1-q}$
+    \end{itemize}
+\end{itemize}
+
+Where:\\[0.5cm]
+$d_{1,2} = \frac{\ln(S/K) + (r - \delta \pm \frac{1}{2}\sigma^2)(T)}{\sigma\sqrt{(T)}}$ \\
+
+$h(x) = \frac{1}{2} + \text{sign}(x)\sqrt{\frac{1}{4} - \frac{1}{4}\exp\left\{-\left(\frac{x}{N+\frac{1}{3}}\right)^2\left(N+\frac{1}{6}\right)\right\}}$ \\
+
+$q^* = h(d_1)$\\\\
+
+Finally, in real-world financial markets, implied volatility is not constant across different strike prices or moneyness levels. Instead, it often exhibits a pattern known as the volatility smile or volatility skew, where implied volatility varies with moneyness.  Relying on a single implied volatility (e.g., at-the-money volatility) could lead to mispricing, especially for options with payoffs that are sensitive to the tails of the asset price distribution. Averaging valuations across multiple moneyness levels allows us to account for the entire implied volatility surface, leading to a more accurate and robust valuation of the note. So to incorporate different moneyness levels we took the average of Note Values at each moneyness level from 65 till 100 at 5 step intervals to get the final Note Value.
+
+\section*{(IV) Valuation Model for the Trigger Callable Contingent Coupon Note}
+
+We have developed a valuation model for the Trigger Callable Contingent Coupon Note using three binomial lattices explained in the subsequest sections
+
+\subsection*{Estimating Parameters (\( u \), \( d \), and \( q \)) to Construct the Binomial Tree}
+
+Assuming there is no arbitrage in the risk-neutral world, we estimate the value of the instrument using risk-neutral probabilities discounted at the risk-free rate F(T\textsubscript{1},T\textsubscript{3}). We employ three different binomial lattice methods to determine the size of the up (\( u \)) and down (\( d \)) movements, and the risk-neutral probability (\( q \)) which uses risk-free rate r(0,T\textsubscript{2}) :
+
+\begin{enumerate}
+    \item \textbf{Cox, Ross, and Rubinstein (CRR) Model}:
+    \[
+    u = e^{\sigma \sqrt{\Delta t}}, \quad d = e^{-\sigma \sqrt{\Delta t}} = \frac{1}{u}
+    \]
+    \[
+    q = \frac{e^{(r_1 - \delta) \Delta t} - d}{u - d}
+    \]
+    
+    \item \textbf{Rendleman and Bartter (RB) Model}:
+    \[
+    u = \exp\left[(r_1 - \delta - 0.5 \sigma^2) \Delta t + \sigma \sqrt{\Delta t}\right]
+    \]
+    \[
+    d = \exp\left[(r_1 - \delta - 0.5 \sigma^2) \Delta t - \sigma \sqrt{\Delta t}\right]
+    \]
+    \[
+    q = \frac{e^{(r_1 - \delta) \Delta t} - d}{u - d}
+    \]
+    
+    \item \textbf{Leisen and Reimer (LR) Model}:
+    \begin{itemize}
+        \item Calculate \( d_1 \) and \( d_2 \):
+        \[
+        d_{1,2} = \frac{\ln\left(\dfrac{S_0}{B}\right) + \left(r_1 - \delta \pm \dfrac{1}{2} \sigma^2\right) (T_2 - T_0)}{\sigma \sqrt{T_2 - T_0}}
+        \]
+        \item Compute the function \( h(x) \):
+        \[
+        h(x) = \dfrac{1}{2} + \text{sign}(x) \sqrt{\dfrac{1}{4} - \dfrac{1}{4} \exp\left(-\left(\dfrac{x}{N + \dfrac{1}{3}}\right)^2 \left(N + \dfrac{1}{6}\right)\right)}
+        \]
+        \item Determine \( q \), \( q^* \), \( u \), and \( d \):
+        \[
+        q = h(d_2), \quad q^* = h(d_1)
+        \]
+        \[
+        u = e^{(r_1 - \delta) \Delta t} \dfrac{q^*}{q}, \quad d = \dfrac{e^{(r_1 - \delta) \Delta t} - u q}{1 - q}
+        \]
+    \end{itemize}
+\end{enumerate}
+
+\noindent Where:
+
+\begin{itemize}
+    \item \( \sigma \) is the implied volatility.
+    \item \( r_1 \) is the continuously compounded risk-free rate r(0,T\textsubscript{2}).
+    \item \( \delta \) is the continuous dividend yield.
+    \item \( \Delta t = \dfrac{T_2 - T_0}{N} \) is the time step size.
+    \item \( S_0 \) is the initial stock price.
+    \item \( B \) is the barrier level.
+    \item \( N \) is the number of time steps.
+    \item \( T_2 - T_0 \) is the time to maturity.
+\end{itemize}
+\subsubsection*{Incorporating Continuous Dividend Yield}
+
+In our model, we incorporate the continuous dividend yield \( \delta \) directly into the stock price dynamics and the risk-neutral probabilities. This reflects the continuous payment of dividends and affects both the expected return and the risk-neutral measure.
+
+\subsubsection*{Assumptions}
+
+\begin{itemize}
+    \item In the risk-neutral world, the expected return on the stock is adjusted for dividends:
+    \[
+    E[S_t] = S_0 e^{(r\textsubscript{1} - \delta) t}
+    \]
+    \item The variance of returns over a period \( t \) is \( \sigma^2 t \).
+    \item The underlying asset's returns are normally distributed over a period \( t \) with mean \( \left(r\textsubscript{1} - \delta - \dfrac{1}{2} \sigma^2\right) t \) and variance \( \sigma^2 t \):
+    \[
+    \ln\left(\dfrac{S_t}{S_0}\right) \sim N\left(\left(r\textsubscript{1} - \delta - \dfrac{1}{2} \sigma^2\right) t, \sigma^2 t\right)
+    \]
+\end{itemize}
+
+\subsection*{Constructing the Stock Price Tree}
+
+We construct the stock price tree with \( N \) time steps over the period from the trade date to the final valuation date, which is \( T_2 - T_0 \) years. Each node in the tree represents a possible price of the underlying asset at a particular time step.
+
+Let:
+
+\begin{itemize}
+    \item \( i \) denote each time step, ranging from \( 0 \) to \( N \).
+    \item \( j \) denote the number of up movements at each time step \( i \), ranging from \( 0 \) to \( i\).
+\end{itemize}
+
+The stock price at each node \( S_{i,j} \) is calculated using the formula:
+
+\[
+S_{i,j} = S_0 u^j d^{i - j}
+\]
+
+\subsubsection*{Examples}
+
+\begin{itemize}
+    \item \textbf{Initial Node} (\( i = 0 \)):
+    \[
+    S_{0,0} = S_0
+    \]
+    \item \textbf{After One Time Step} (\( i = 1 \)):
+    \begin{itemize}
+        \item If the price moves up (\( j = 1 \)):
+        \[
+        S_{1,1} = S_0 u
+        \]
+        \item If the price moves down (\( j = 0 \)):
+        \[
+        S_{1,0} = S_0 d
+        \]
+    \end{itemize}
+    \item \textbf{At Node (\( i, j \))}:
+    \[
+    S_{i,j} = S_0 u^j d^{i - j}
+    \]
+\end{itemize}
+
+
+\subsection*{Constructing the Valuation Tree Using Backward Induction}
+
+After constructing the stock price tree, we build a valuation tree to determine the value of the note at each node. We start by specifying the note's value at maturity based on its payoff structure.
+
+\subsubsection*{Payoff at Maturity}
+
+At maturity (\( i = N \)):
+
+\begin{itemize}
+    \item \textbf{If \( S_{N,j} \geq B \)}:
+
+    The investor receives the principal amount plus the final coupon payment:
+    \[
+    V_{N,j} = \text{Principal Amount} + \text{Coupon Payment}
+    \]
+
+    \item \textbf{If \( S_{N,j} < B \)}:
+
+    The investor receives the share delivery amount times the stock price:
+    \[
+    V_{N,j} = \text{Share Delivery Amount} \times S_{N,j}
+    \]
+\end{itemize}
+
+\subsubsection*{Backward Induction}
+
+Using backward induction, we compute the value at each preceding node:
+
+\[
+V_{i,j} = e^{-r_2 \Delta t} \left[ q V_{i+1,j+1} + (1 - q) V_{i+1,j} \right]
+\]
+
+Where:
+
+\begin{itemize}
+    \item \( V_{i,j} \) is the value of the note at node \( (i, j) \).
+    \item \( r_2 \) is the risk-free rate.
+    \item \( \Delta t \) is the time step size.
+    \item \( q \) is the risk-neutral probability of an up move.
+\end{itemize}
+
+At each observation step \( i \) (corresponding to observation dates), we adjust the valuation based on the note's features.
+
+\subsubsection*{Coupon and Trigger Callable Adjustments}
+
+For each node at observation steps:
+
+\begin{itemize}
+    \item \textbf{If \( S_{i,j} \geq B \):}
+    \begin{itemize}
+        \item \textbf{Coupon Payment Adjustment:}
+        \[
+        V_{i,j} = e^{-r_2 \Delta t} \left[ q V_{i+1,j+1} + (1 - q) V_{i+1,j} \right] + \text{Coupon Payment}
+        \]
+    \end{itemize}
+    \item \textbf{If \( S_{i,j} < B \):}
+    \begin{itemize}
+        \item \textbf{No Coupon Payment:}
+        \[
+        V_{i,j} = e^{-r_2 \Delta t} \left[ q V_{i+1,j+1} + (1 - q) V_{i+1,j} \right]
+        \]
+    \end{itemize}
+\end{itemize}
+
+Additionally, if the note is callable (after the call protection period) at observation step \( i \):
+\vspace{-2ex}
+\begin{itemize}
+    \item \textbf{Call Decision:}
+    \begin{itemize}
+        \item Calculate the continuation value \( \text{Cont}_i \) as above.
+        \item Calculate the call payoff:
+        \[
+        \text{Call Payoff} = \text{Principal Amount} + \text{Coupon Payment}
+        \]
+        \item The node value \( V_{i,j} \) is the minimum of the continuation value and the call payoff:
+        \[
+        V_{i,j} = \min\left( \text{Call Payoff}, V_{i,j} \right)
+        \]
+    \end{itemize}
+\end{itemize}
+\vspace{-5ex}
+\subsubsection*{Final Valuation}
+
+By recursively applying the backward induction process from maturity to the present, we compute the value at the initial node \( V_{0,0} \), which represents the estimated fair value of the note for a given implied volatility but as decribed above in methodology we will we averaging across the different moneyness implied vols. So the Final Value of the Note using Leisen-Reimer Binomial Lattice with 9999 time steps averaged out across different moneyness implied volatilities comes out to be  \underline{\textbf{\$973.42}}.
+
+\vspace{-2ex}
+
+\section*{(VI) Sensitivity Analysis and Possible Errors}
+
+\subsection*{Sensitivity Analysis w.r.t. Moneyness}
+\begin{itemize}
+\item Cox, Ross, and Rubinstein (CRR) Model:
+The note's value increases as moneyness increases. The graph shows some fluctuations; it's less smooth compared to the RB and LR models. As moneyness increases (stock price rises relative to the strike or barrier levels), the likelihood of favorable outcomes for the investor increases, such as receiving coupons or higher redemption amounts. And the less smoothness says that for CRR lattice the Note Values are much more sensitive to the implied volatilities. And here the graph for N=9999 timesteps is much smoother compared to N=50 essentially stating that as time steps increases. The sensitivity of implied vols on Note Value reduces.
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/sen_crr_50.png}
+        \caption{CRR Note Value vs. Moneyness (N=50)}
+        \label{fig:crr_n50}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/sen_crr.png}
+        \caption{CRR Note Value vs. Moneyness (N=9999)}
+        \label{fig:crr_n9999}
+    \end{subfigure}
+    \caption{CRR Note Values for Different Time Steps}
+    \label{fig:crr_comparison}
+\end{figure}
+
+\clearpage  % Force a page break before the Approach section
+
+\item  Rendleman and Bartter (RB) Model:
+Just like CRR here as well the note's value increases as moneyness increases. The graph shows some fluctuations but it is more smooth compared to the RB but less smooth compared to LR model. The better smoothness is explained by a better choice of up and down movement quotients to get the probability measure q.  Just like CRR we can see that RB is also sensitive to implied vols but not as much as CRR although worse than LR. And here the graph for N=9999 timesteps is much smoother compared to N=50 essentially stating that as time steps increases. The sensitivity of implied vols on Note Value reduces.
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/sen_rb_50.png}
+        \caption{RB Note Value vs. Moneyness (N=50)}
+        \label{fig:crr_n50}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/sen_rb.png}
+        \caption{RB Note Value vs. Moneyness (N=9999)}
+        \label{fig:crr_n9999}
+    \end{subfigure}
+    \caption{RB Note Values for Different Time Steps}
+    \label{fig:crr_comparison}
+\end{figure}
+
+
+\item Leisen and Reimer (LR) Model:
+Finally for the LR model we can see that even for N=50 the curve is smooth stating that it is less sensitive compared to other Binomial lattiices chosen. Hence the better among the three to be chosen for Note valuation.
+\begin{figure}[htbp]
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/sen_lr_50.png}
+        \caption{LR Note Value vs. Moneyness (N=50)}
+        \label{fig:crr_n50}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/sen_lr.png}
+        \caption{LR Note Value vs. Moneyness (N=9999)}
+        \label{fig:crr_n9999}
+    \end{subfigure}
+    \caption{LR Note Values for Different Time Steps}
+    \label{fig:crr_comparison}
+\end{figure}
+\end{itemize}
+
+
+\subsection*{Error Profiles}
+\begin{itemize}
+\item Cox, Ross, and Rubinstein (CRR) Model:
+For CRR we can clearly see that there are non-linearity errors as the Note value fluctuates a lot for smaller time steps N and as we incraese the N steps the errors reduce. This happens because as the number of time-steps increases the discrete barriers move halfway between Binomial tree nodes thus effectively reducing the non-linearity errors.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.1\textwidth, height=0.23\textheight]{Images/err_crr.png}
+    \caption{The CRR Note Value Profile for Different Time Steps (N)}
+    \label{fig:yourlabel}
+\end{figure}
+
+
+\item  Rendleman and Bartter (RB) Model:
+Similar to CRR above here as well we can clearly see that there are non-linearity errors as the Note value fluctuates a lot for smaller time steps N and as we incraese the N steps the errors reduce. The reasoning for this is also the same  as the number of time-steps increases the discrete barriers move halfway between Binomial tree nodes thus effectively reducing the non-linearity errors.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.1\textwidth, height=0.23\textheight]{Images/err_rb.png}
+    \caption{The RB Note Value Profile for Different Time Steps (N)}
+    \label{fig:yourlabel}
+\end{figure}
+
+
+\item Leisen and Reimer (LR) Model:
+For LR we can clearly see that there are no non-linearity errors  and the Note value very smoothly converges to a value around \$975 but there are still some errors even after 9999 timesteps because we cannot get rid of errors arising due to the call feature but it is mostly minimal error for Large timesteps. Hence we chose LR method as it resulted in the least errors..
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.1\textwidth, height=0.23\textheight]{Images/err_lr.png}
+    \caption{The LR Note Value Profile for Different Time Steps (N)}
+    \label{fig:yourlabel}
+\end{figure}
+\end{itemize}
+
+\section*{(VII)Further Discussions}
+We found LR to be the best model for the binomial lattice but there is another model Broadie-Detemple (BD) which could have been chosen to value the Note. It is even better than LR in reducing Non-Linearity errors as it completely takes away the errors arrising at maturity nodes by assuming the Note to behave as a European option between N-1 and N timestep.
+
+
+
+\end{document}
