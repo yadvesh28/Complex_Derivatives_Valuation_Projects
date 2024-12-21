@@ -1,0 +1,521 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage[
+    top=1cm,
+    bottom=0.7cm,
+    left=0.8in,
+    right=0.8in,
+    includeheadfoot,
+    heightrounded
+]{geometry}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{array}
+\usepackage{adjustbox} % Allows adjusting table to fit within margins
+\usepackage{graphicx}
+\usepackage{float}  % For [H] placement specifier
+\usepackage{subcaption}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=blue,
+    urlcolor=blue,
+    pdftitle={Callable Contingent Income Securities},
+}
+
+% Define new column type for better spacing
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+
+% Define American Blue color (RGB: 0, 71, 171)
+\definecolor{americanblue}{RGB}{0,71,171}
+\definecolor{headerblue}{RGB}{0,157,224}  % Bright blue for header
+\definecolor{lightblue}{RGB}{217,241,255} % Light blue for alternate rows
+
+\begin{document}
+
+
+\begin{center}
+{\color{americanblue}\Large\textbf{Autocallable Contingent Coupon Equity Linked Securities Linked to the VanEck Vectors® Junior Gold Miners ETF Due July 21, 2025}}
+
+\vspace{0.2cm}
+{\color{americanblue}\large\href{https://www.sec.gov/Archives/edgar/data/200245/000148105724000574/form424b2.htm}{SEC Filing Link to the Security}}
+
+\vspace{0.2cm}
+{\color{americanblue}\Large\textbf{Payments on the Securities Based on the Knock-in Event}}
+
+\vspace{0.2cm}
+{\small{\it -Valuation report by Yadvesh, Krish and Mayank}}
+\end{center}
+
+\vspace{1ex}
+
+\section*{(I) Introduction}
+
+This report aims to value the  \underline{Callable Contingent Income Securities} Notes, the payments of which are based on the Worst Performing of the Russell 2000\textsuperscript{\textregistered} Index and the S\&P 500\textsuperscript{\textregistered} Index due December 3, 2025. The note has discrete features as a call feature on the \hyperref[app:dates]{redemption dates} along with contingent coupons payable basis the index closing value of each underlying index on \hyperref[app:dates]{observation dates}. The Agent for this note is Morgan Stanley \& Co. LLC (“MS \& Co.”). For detailed information about the note's features and key dates, see the \hyperref[app:keydates]{Appendix}.
+
+\vspace{0.5cm}
+
+
+\underline{\textbf{Payoff at Maturity of the Note is:}}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth, height=0.4\textheight]{images_project_3/payoff_project_2.png}
+    \caption{Payoff at Maturity}
+    \label{fig:yourlabel}
+\end{figure}
+
+\clearpage  % Force a page break before the Approach section
+
+The valuation method we chose to value this note was Longstaff and Schwartz Least Squares Monte Carlo (LSLSMC) simulation method for 2 underlying assets. The following steps were involved in this valuation methodology:
+\begin{enumerate}
+\item Calculation of Discounting(r\textsubscript{2}) and Index value Simulation(r\textsubscript{1}) risk-free rates from the discount factors obtained from \hyperref[app:ois]{OIS data}.
+\item Calculating the 6 months, 12 months, 18 months and 24 months correlation between the underlying indices (RTY and SPX).
+\item To calculate the value of the note using LSLSMC method we did 10 trial runs with 100000 simulations for each trial, and following steps were involved:
+	\begin{enumerate}
+	\item Using Cholesky-Factorization method to get the correlation diffusion matrix which stores the m-values for each underlying's stochastic process and using this diffusion matrix to simulate the index value movements.
+	\item Calculating the payoff at maturity $(V^i_M)$ for each simulation $i \in N$. Then moving back one observation date to calculate the pathCV value $(pathCV^i_{M-1})$ for each simulation $i \in N$.
+	\item Then running a regression of sixth order polynomial in RTY and SPX indices to get the value of best-fit coefficients and calculating $\hat{CV}^i_{M-1}$ for each simulation $i \in N$.
+	\item Using the value of $\hat{CV}^i_{M-1}$ from previous step to decide the value of note at that observation step as either the redemption value or the continuation value which is $pathCV^i_{M-1}$.
+	\item Reiterating these steps till the first observation date and the getting the discounted note values for each simulation $i \in N$.
+	\item For the present value of Note, average the Value of Note at first observation date and discount back to the pricing date (November 28, 2023).
+	\item The above steps were done for volatalities corresponding to moneyness of (70,70) and (100,100) for the underlying (RTY,SPX) indices and the average between the two was taken as the final value of the note.
+	\end{enumerate}
+\item Performing Sensitivity analyses by varying Number of Simulationsi, Volatilities of underlying indices and the correlation factors between the underlying indices (RTY and SPX).
+\end{enumerate}
+*\underline{Note}:  We have used a continuous dividend yield for both the index value simulation models as in the risk-neutral measure for derivative pricing using the Geometric Brownian Motion (GBM), a continuous dividend yield is incorporated directly into the stock price dynamics, simplifying the differential equations involved and allowing for analytical solutions in models like Black-Scholes.
+
+\vspace{0.5cm}
+According to our valuation methods, we estimate the value of the note to be \underline{\textbf{\$969.98}}.
+
+\clearpage  % Force a page break before the Approach section
+
+\section*{(II) Input Data Characteristics:}
+\begin{enumerate}
+\phantomsection 
+\label{app:ois}
+\item \underline{\textbf{Risk-Free Rate (OIS):}}
+	\begin{itemize}
+	\item  OIS rates are based on overnight lending rates which have very low credit risk. OIS closely tracks the central bank's target rates and the OIS market is typically very liquid so we use OIS as a proxy from risk-free rates. However, OIS rate is based on very short-term rates, which may not fully capture the term structure of interest rates for longer-dated instruments.
+	\item For our Project we had to Linearly Interpolate the Discount Factors to get the continuously compounded Risk-free rate r(0,T\textsubscript{1}) for Original issue date(T\textsubscript{1}) and  r(0, T\textsubscript{3}) for Maturity Date(T\textsubscript{3}) respectively. The calculated values were r(0,T\textsubscript{1}) = \textbf{5.40320\%} and r(0,T\textsubscript{3}) = \textbf{4.65378\%}
+	\item After Linear interpolationand rate calculation we had to figure out the forward rate F(T\textsubscript{1}, T\textsubscript{3}) from Original issue date(T\textsubscript{1}) to Maturity Date(T\textsubscript{3}) which would be used for discounting. Also, r(0,T\textsubscript{2}) will be used for index value simulations.
+	\item The final Values for  r(0,T\textsubscript{2})  for LSLSMC simulations is r(0,T\textsubscript{2}) = \textbf{4.660619\%} and  F(T\textsubscript{1}, T\textsubscript{3}) for discounting  F(T\textsubscript{1}, T\textsubscript{3}) = \textbf{4.650710\%}
+	\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth, height=0.3\textheight]{images_project_3/ois.png}
+    \caption{USD OIS at 01/16/2024}
+    \label{fig:yourlabel}
+\end{figure}
+\item \underline{\textbf{Implied Volatility Matrix:}}
+	\begin{itemize}
+	\item  The Implied Volatility Matrix is used extensively in options pricing to gauge the volatility across different strike prices (moneyness) and maturities. It provides a real-time snapshot of volatility expectations. However, if the market is illiquid, the matrix may not reflect accurate volatility estimates, especially for less popular strikes or distant expirations.
+	\item For our project since the Note we are valuing approximately matures in 2 Years so we used 24M Volatilites from the Volatility-Matrix at different Moneyness from 70 till 100 for both the underlying indices RTY and SPX to gauge the sensitivity of Note Valuation on different volatilities.
+	\end{itemize}
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth, keepaspectratio]{images_project_3/vols.png}
+        \caption{Implied Volatility Matrix for RTY at 11/28/2023}
+        \label{fig:rty_vol}
+    \end{subfigure}
+    \vspace{0.5cm}
+    \begin{subfigure}{\textwidth}
+        \centering
+        \includegraphics[width=0.95\textwidth, keepaspectratio]{images_project_3/spx_vol.png}
+        \caption{Implied Volatility Matrix for SPX at 11/28/2023}
+        \label{fig:spx_vol}
+    \end{subfigure}
+    \caption{Implied Volatility Matrices at 11/28/2023}
+    \label{fig:vol_matrices}
+\end{figure}
+
+\item \underline{\textbf{Continuous Dividend Yield:}}
+	\begin{itemize}
+	\item  Including the dividend yield allows for a more accurate representation of the underlying asset’s value trajectory over time. A continuous dividend yield is incorporated directly into the stock price dynamics, simplifying the differential equations involved and allowing for analytical solutions in models like Black-Scholes.
+	\item For our project we used a continuous dividend yield of D1 = \textbf{1.606\%}  for the RTY index and D2 = \textbf{1.598\%}  for the SPX index.
+	\end{itemize}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth, height=0.4\textheight]{images_project_3/rty_div.png}
+        \caption{RTY at 11/28/2023}
+        \label{fig:rty_vol}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth, height=0.4\textheight]{images_project_3/spx_div.png}
+        \caption{SPX at 11/28/2023}
+        \label{fig:spx_vol}
+    \end{subfigure}
+    \caption{Dividend-Yields at 11/28/2023}
+    \label{fig:vol_matrices}
+\end{figure}
+
+\item \underline{\textbf{Correlation Factors at different time horizons:}}
+	\begin{itemize}
+	\item For our project the correlation factor between the RTY and SPX index returns at 6 months, 12 months, 18 months and 24 months time horizons was calculated using the historical data of the two underlying indices.
+	\item These correlation factors are further used in cholesky factorization for index value simulations and sensitivity analyses for different correlation factors.
+	\end{itemize}
+\begin{figure}[H]
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|C{0.45\textwidth}|C{0.45\textwidth}|}
+\hline
+\multicolumn{2}{|c|}{\cellcolor{headerblue}\color{white}\textbf{Correlation Factors}} \\
+\hline
+\cellcolor{lightblue}\textbf{Time horizon} & \cellcolor{lightblue}\textbf{Correlation Factor ($\rho_{12}$)} \\
+\hline
+6M & 0.736798 \\
+\hline
+12M & 0.825055 \\
+\hline
+18M & 0.885226 \\
+\hline
+24M & 0.889623 \\
+\hline
+\end{tabular}
+\end{center}
+\caption{Correlation Factors between RTY and SPX indices}
+\label{fig:correlation}
+\end{figure}
+\end{enumerate}
+
+\section*{(III) Methodology}
+
+We have valued the note using the Longstaff and Schwartz Least Squares Monte Carlo (LSLSMC) simulation method for two underlying assets: the Russell 2000 Index (RTY) and the S\&P 500 Index (SPX). The LSLSMC method is particularly suitable for valuing American-style derivatives with early exercise features and path-dependent options, such as our Callable Contingent Coupon Note. Below are the detailed steps involved in our valuation methodology:
+
+\subsection*{Assumptions}
+
+\begin{itemize}
+    \item \textbf{Risk-Neutral Valuation:} We assume that investors are risk-neutral, and the expected return on the indices is the risk-free rate adjusted for dividends.
+    \item \textbf{No Arbitrage:} The market is arbitrage-free, and the underlying asset prices follow a GBM.
+    \item \textbf{Constant Volatility and Dividend Yield:} Volatility and dividend yields are constant over the simulation period.
+    \item \textbf{Correlation Structure:} The correlation between the indices is constant and estimated based on historical data.
+    \item \textbf{Market Completeness:} Markets are complete, allowing us to perfectly hedge derivatives.
+\end{itemize}
+
+\subsection*{1. Calculation of Risk-Free Rates and Discount Factors}
+
+We first calculated the continuously compounded risk-free rates for discounting (\( r_2 \)) and for simulating the index values (\( r_1 \)) using the discount factors obtained from Overnight Indexed Swap (OIS) data.
+
+\begin{itemize}
+    \item \textbf{Discount Factors (DF):} We obtained discount factors at key dates from the OIS data.
+    \item \textbf{Interpolation:} For dates not directly available in the data, we performed linear interpolation based on the year fractions to calculate the discount factors.
+    \item \textbf{Risk-Free Rates:} Using the interpolated discount factors, we calculated the continuously compounded risk-free rates \( r \) for different time periods using:
+    \[
+    r = -\frac{\ln(\text{DF})}{T}
+    \]
+    where \( T \) is the year fraction between the dates.
+\end{itemize}
+
+\subsection*{2. Estimation of Historical Correlation}
+
+We calculated the historical correlations between RTY and SPX over horizons of 6, 12, 18, and 24 months using historical price data.
+
+\begin{itemize}
+    \item \textbf{Data Preparation:} We cleaned and aligned the historical price data for both indices.
+    \item \textbf{Return Calculation:} We computed the daily percentage returns for each index.
+    \item \textbf{Correlation Calculation:} For each horizon \( h \), we calculated the Pearson correlation coefficient:
+    \[
+    \rho_{\text{RTY}, \text{SPX}} = \frac{\text{Cov}(R_{\text{RTY},h}, R_{\text{SPX},h})}{\sigma_{\text{RTY},h} \sigma_{\text{SPX},h}}
+    \]
+    where \( R_{\text{RTY},h} \) and \( R_{\text{SPX},h} \) are the returns over horizon \( h \), and \( \sigma \) denotes standard deviation.
+\end{itemize}
+
+\subsection*{3. Valuation Using Least Squares Monte Carlo (LSLSMC) Method}
+
+We performed 10 trial runs, each with 100,000 Monte Carlo simulations, to estimate the value of the note. The following steps were involved:
+
+\subsubsection*{a. Simulating Index Paths with Correlated Geometric Brownian Motion (GBM)}
+
+We simulated the future paths of the indices using GBM, incorporating the continuous dividend yields and the correlation between the indices.
+
+\begin{itemize}
+    \item \textbf{Cholesky Decomposition:} We used the Cholesky decomposition to model the correlation between the indices. The correlation matrix \( \boldsymbol{\rho} \) is decomposed as:
+    \[
+    \mathbf{C} = \text{Cholesky}(\boldsymbol{\rho})
+    \]
+    \item \textbf{Random Number Generation:} We generated standard normal random variables \( \phi_1 \) and \( \phi_2 \) for each simulation and time step.
+    \item \textbf{Correlated Random Variables:} We obtained correlated random variables \( \epsilon_1 \) and \( \epsilon_2 \):
+    \[
+    \begin{pmatrix} \epsilon_1 \\ \epsilon_2 \end{pmatrix} = \mathbf{C} \begin{pmatrix} \phi_1 \\ \phi_2 \end{pmatrix}
+    \]
+    \item \textbf{Index Simulation:} We simulated the index levels using the discretized GBM formula:
+\begin{align*}
+S_{i,j}^{1} &= S_{i,j-1}^{1} \exp\left\{ \left( r_1 - D_1 - \tfrac{1}{2} \sigma_1^2 \right) \Delta t + \sigma_1 \sqrt{\Delta t} \, \epsilon_1^{i} \right\} \\
+S_{i,j}^{2} &= S_{i,j-1}^{2} \exp\left\{ \left( r_1 - D_2 - \tfrac{1}{2} \sigma_2^2 \right) \Delta t + \sigma_2 \sqrt{\Delta t} \, \epsilon_2^{i} \right\}
+\end{align*}
+    where:
+    \begin{itemize}
+        \item \( S_{i,j}^{(1)} \) is the index level of RTY index at time \( j \) in simulation \( i \).
+        \item \( S_{i,j}^{(2)} \) is the index level of SPX index at time \( j \) in simulation \( i \).
+        \item \( D_1 \) is the continuous dividend yield of RTY index.
+	\item \( D_2 \) is the continuous dividend yield of SPX index.
+        \item \( \sigma_1 \) is the volatility of RTY index.
+	\item \( \sigma_2 \) is the volatility of SPX index.
+        \item \( \Delta t \) is the time step size.
+    \end{itemize}
+\end{itemize}
+
+\subsubsection*{b. Payoff Calculation at Final Observation Date(discounted back to November 28, 2025 from December 3, 2025)}
+
+For each simulation path $i \in N$, we calculated the payoff at maturity (\( V_M^{i} \)) as:
+
+\begin{itemize}
+    \item \textbf{If Both Indices Are Above the Downside Threshold at Maturity:}
+    \[
+    V_M^{i} = ( \text{Principal Amount} + \text{Final Coupon} ) \times e^{-r_2 \Delta t}
+    \]
+    \item \textbf{If Either Index Is Below the Barrier at Maturity:}
+    \[
+    V_M^{i} = \left( \text{Principal Amount} \times \min\left( \frac{S_{\text{RTY},M}^{i}}{S_{\text{RTY},0}}, \frac{S_{\text{SPX},M}^{i}}{S_{\text{SPX},0}} \right) \right) \times e^{-r_2 \Delta t}
+    \]
+\end{itemize}
+
+\subsubsection*{c. Backward Induction Using Regression}
+
+We moved backward from maturity to earlier observation dates to estimate the continuation value (\( \text{CV} \)) at each step.
+
+\begin{itemize}
+    \item \textbf{Pathwise Continuation Value (\( \text{pathCV} \)):} At each observation date \( j \), we calculated the discounted future payoff:
+    \[
+    \text{pathCV}^{i}_{j} = e^{-r_2 \Delta t} V^{i}_{j+1}
+    \]
+    \item \textbf{Including Coupon Payments:} At each observation date \( j \), we determined whether the coupon payment condition was met:
+    \begin{itemize}
+        \item If both \( S_{\text{RTY},j}^{i} \geq 70\% \times S_{\text{RTY},0} \) and \( S_{\text{SPX},j}^{i} \geq 70\% \times S_{\text{SPX},0} \), then:
+        \[
+        \text{cpn\_val}^{i}_{j} = \text{Coupon Payment} \times e^{-r_2 (\text{$t_{red}$})}
+        \]
+	 where \(t_{\text{red}}\) is time from Coupon Payment Date to Observation Date
+        \item Else:
+        \[
+        \text{cpn\_val}^{i}_{j} = 0
+        \]
+    \end{itemize}
+    \item \textbf{Regression to Estimate Conditional Expectation (\( \hat{\text{CV}} \)):} We performed a cross-sectional regression using a polynomial of order six in both indices to estimate \( \hat{\text{CV}}^{i}_{j} \):
+    \[
+    \hat{\text{CV}}^{i}_{j} = \beta_0 + \sum_{k=1}^6 \sum_{l=0}^{k} \beta_{kl} \left( S_{\text{RTY},j}^{i} \right)^{k-l} \left( S_{\text{SPX},j}^{i} \right)^{l}
+    \]
+    \item \textbf{Decision to Exercise Early Redemption or Continue:}
+    \begin{itemize}
+        \item Calculate the immediate redemption value, including the principal amount and the coupon payment (if any):
+        \[
+        \text{Redemption Amount} = \text{Principal Amount} \times e^{-r_2 (\text{$t_{red}$})} + \text{cpn\_val}^{i}_{j}
+        \]
+	 where \(t_{\text{red}}\) is time from Redemption Date to Observation Date
+        \item If early redemption is optimal (based on comparing \( \hat{\text{CV}}^{i}_{j} \) and \( \text{Redemption Amount} \)):
+        \[
+        V^{i}_{j} = \text{Redemption Amount}
+        \]
+        \item Else:
+        \[
+        V^{i}_{j} = \text{pathCV}^{i}_{j} + \text{cpn\_val}^{i}_{j}
+        \]
+    \end{itemize}
+\end{itemize}
+
+
+\subsubsection*{d. Iteration to Initial Observation Date}
+
+We iterated the backward induction process to the first observation date (\( j = 1 \)), calculating the note value at each step and discounting back to the pricing date (\( T_0 \)).
+
+\subsubsection*{e. Averaging Across Simulations}
+
+The present value of the note was estimated by averaging the note values across all simulations at the initial observation date and discounting back to the pricing date:
+
+\[
+\text{Note Value} = e^{-r_2 T_0} \frac{1}{N} \sum_{n=1}^{N} V^{i}_{0}
+\]
+
+\subsubsection*{f. Averaging Across Different Volatility Scenarios}
+
+To account for the volatility smile or skew in real-world markets, we performed the valuation for volatilities corresponding to moneyness levels of (70\%, 70\%) and (100\%, 100\%) for the underlying indices and took the average of the two valuations as the final value of the note.
+
+
+
+\section*{(VI) Sensitivity Analysis and Possible Errors}
+
+\subsection*{Sensitivity Analysis}
+
+We performed sensitivity analyses to understand the impact of key parameters on the note valuation:
+
+\begin{itemize}
+    \item \textbf{Number of Simulations (\( N \)):} Increasing \( N \) improves the accuracy of the Monte Carlo estimation but at the cost of computational time.
+	\begin{figure}[H]
+	    \centering
+	    \includegraphics[width=0.8\textwidth, keepaspectratio]{images_project_3/note_val_sim.png}
+	    \caption{Note Value vs Number of Simulation Steps}
+	    \label{fig:yourlabel}
+	\end{figure}
+    \item \textbf{Volatilities (\( \sigma_1, \sigma_2 \)):} Higher volatilities decrease the value of the note due to higher probability of hitting downside barriers and thus undervaluing the Note. And for lower volatalities we habe lower probability of hitting the downside barrier thus we are overvaluing the note. Since we don't know the exact volatalities therefore we average out the values at (70,70) and (100,100) moneyness to get an estimated fair value of the note.
+	\begin{figure}[H]
+	    \centering
+	     \includegraphics[width=0.8\textwidth, keepaspectratio]{images_project_3/note_val_sigma.png}
+	    \caption{Note Value vs Sigma1,Sigma2 values}
+	    \label{fig:yourlabel}
+	\end{figure}
+    \item \textbf{Correlation (\( \rho_{12} \)):} The correlation between the indices affects the joint probability distribution of the indices, impacting the likelihood of simultaneous movements above or below barriers. We can clearly see here that as the rho12 time horizon increases the value of note also increases this is because when the two underlying indices are positively correlated the indices are less likely to diverge significantly decreases the risk that one index will perform much worse than the other and this generally leads to a higher valuation of the note.
+	\begin{figure}[H]
+	    \centering
+	    \includegraphics[width=0.95\textwidth, keepaspectratio]{images_project_3/note_val_rho.png}
+	    \caption{Note Value vs Correlation factors}
+	    \label{fig:yourlabel}
+	\end{figure}
+\end{itemize}
+
+\begin{figure}[htbp]
+\centering
+\renewcommand{\arraystretch}{1.2}  % Vertical spacing
+\setlength{\tabcolsep}{15pt}      % Horizontal spacing
+\begin{tabular}{|l|r|r|r|r|}
+\hline
+\rowcolor{cyan!15}\bf Rho Time Horizon & \multicolumn{1}{c|}{\bf 6M} & \multicolumn{1}{c|}{\bf 12M} & \multicolumn{1}{c|}{\bf 18M} & \multicolumn{1}{c|}{\bf 24M} \\
+\hline
+(RTY:70), (SPX:70) & 937.09 & 941.22 & 946.81 & 947.11 \\
+\hline
+(RTY:70), (SPX:100) & 952.02 & 954.49 & 955.84 & 958.13 \\
+\hline
+(RTY:100), (SPX:70) & 962.02 & 966.01 & 968.70 & 968.68 \\
+\hline
+(RTY:100), (SPX:100) & 986.73 & 989.13 & 991.54 & 990.18 \\
+\hline
+(RTY:90), (SPX:80) & 965.54 & 968.41 & 973.02 & 974.18 \\
+\hline
+\end{tabular}
+\caption{Moneyness vs correlation}
+\label{fig:moneyness_correlation}
+\end{figure}
+
+
+\section*{(VII) Conclusion}
+
+The Longstaff and Schwartz Least Squares Monte Carlo method provides a flexible framework for valuing complex financial derivatives like the Callable Contingent Coupon Note. By simulating the paths of the underlying indices and using regression techniques to estimate continuation values, we can account for the early exercise and path-dependent features of the note
+
+\section*{(VII)Further Discussions}
+Here we have assumed constant volatilities and correlation for note valuation which may not hold true in practice. Then the  Finite number of simulations introduces sampling error in our estimation we can increase \( N \) to reduce this error. And Finally using only two moneyness levels may not fully capture the volatility surface so a more detailed analysis could improve accuracy. Like running the note value calculation for all sigma1 and sigma2 values and estimatimating optimal value using backtesting or comparing with similar products.
+\vspace{0.5cm}
+\phantomsection 
+\label{sec:appendix}
+\begin{center}
+{\Large\textbf{\underline{Appendix}}}
+\end{center}
+
+\phantomsection 
+\label{app:keydates}
+\underline{\textbf{1) Below are the Key Dates of the Note:}}
+
+\begin{center}
+\renewcommand{\arraystretch}{1} % Increase row height
+\begin{tabular}{|C{0.45\textwidth}|C{0.45\textwidth}|} % Ensuring full borders for all cells
+\hline
+\multicolumn{2}{|c|}{\cellcolor{headerblue}\color{white}\textbf{Key Dates}} \\
+\hline
+\textbf{Pricing Date (T\textsubscript{0})} & January 16, 2024 \\
+\hline
+\textbf{Original Issue Date (T\textsubscript{1})} & January 19, 2024 \\
+\hline
+\rowcolor{lightblue}\textbf{Valuation Dates} & April 16, 2024, July 16, 2024, October 16, 2024, January 16, 2025, April 16, 2025 and July 16, 2025 \\
+\hline
+\rowcolor{lightblue}\textbf{Final Valuation Date (T\textsubscript{2})} & July 16, 2025 \\
+\hline
+\rowcolor{lightblue}\textbf{Maturity Date (T\textsubscript{3})} & July 21, 2025 \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+
+\phantomsection
+\label{app:noteoffering}
+\underline{\textbf{2) Below are the Note Offerings:}}
+
+\begin{center}
+\begin{adjustbox}{width=1.2\textwidth,center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\multicolumn{5}{|c|}{\cellcolor{headerblue}\color{white}\textbf{Note Offering}} \\
+\hline
+\cellcolor{lightblue}\textbf{Underlying Asset} & \cellcolor{lightblue}\textbf{Bloomberg Ticker} & \cellcolor{lightblue}\textbf{Initial Level} & \cellcolor{lightblue}\textbf{Coupon Barrier} & \cellcolor{lightblue}\textbf{Knock-in value} \\
+\hline
+VanEck Vectors\textsuperscript{\textregistered} Junior Gold Miners ETF & GDXJ & 34.66 & 24.262 (70.00\% of initial) & 24.262 (70.00\% of initial) \\
+\hline
+\multicolumn{5}{|c|}{\textbf{Contingent Coupon Rate:} 14.25\% per annum (equivalent to 3.5625\% on Coupon Payment Dates)} \\
+\hline
+\multicolumn{5}{|c|}{\renewcommand{\arraystretch}{2.0}
+\begin{tabular}{c}
+\textbf{Underlying Return:} $\frac{\text{Final underlying value} - \text{Initial underlying value}}{\text{Initial underlying value}}$
+\end{tabular}} \\
+\hline
+\multicolumn{5}{|c|}{\textbf{CUSIP/ISIN:} 17291TYM4 / US17291TYM43} \\
+\hline
+\end{tabular}
+\end{adjustbox}
+\end{center}
+
+\vspace{0.5cm}
+
+\phantomsection
+\label{app:dates}
+\underline{\textbf{3) Below are the Observation Dates, Autocall Dates and Coupon Payment Dates:}}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3} % Increase row height
+\begin{tabular}{|C{0.3\textwidth}|C{0.3\textwidth}|C{0.3\textwidth}|}
+\hline
+\multicolumn{3}{|c|}{\cellcolor{headerblue}\color{white}\textbf{Observation Dates, Autocall Dates and Coupon Payment Dates}} \\
+\hline
+\cellcolor{lightblue}\textbf{Observation Dates} & \cellcolor{lightblue}\textbf{Autocall Dates} & \cellcolor{lightblue}\textbf{Coupon Payment Dates} \\
+\hline
+April 16, 2024 & April 16, 2024 & April 19, 2024 \\
+\hline
+\rowcolor{lightblue}July 16, 2024 & July 16, 2024 & July 19, 2024 \\
+\hline
+October 16, 2024 & October 16, 2024 & October 21, 2024 \\
+\hline
+\rowcolor{lightblue}January 16, 2025 & January 16, 2025 & January 21, 2025 \\
+\hline
+April 16, 2025 & April 16, 2025 & April 21, 2025 \\
+\hline
+\rowcolor{lightblue}July 16, 2025 (final valuation date) & - & July 21, 2025 (maturity date) \\
+\hline
+\end{tabular}
+\end{center}
+
+\vspace{0.5cm}
+
+\phantomsection 
+\label{app:characteristics}
+\underline{\textbf{4) Some important characteristics of the note are:}}
+
+\begin{enumerate}
+\item The note has two underlying assets i.e. Russell 2000\textsuperscript{\textregistered} Index and the S\&P 500\textsuperscript{\textregistered} Index. 
+\item Beginning on May 31, 2024, an early redemption, will occur on a redemption date if and only if the output of a risk neutral valuation model on a business day, as selected by the calculation agent, that is no earlier than three business days before the observation date preceding such redemption date and no later than such observation date (the “determination date”), taking as input: (i) prevailing reference market levels, volatilities and correlations, as applicable and in each case as of the determination date and (ii) Morgan Stanley’s credit spreads as of the pricing date, indicates that redeeming on such date is economically rational for us as compared to not redeeming on such date, and no further payments will be made on the securities once they have been redeemed.
+\item A contingent quarterly coupon is payable on a coupon payment date is the index closing value of each underlying index is greater than or equal to its respective coupon barrier level(70\% of initial level for each index) on the applicable observation date and no contingent coupon will be paid if the closing value of either underlying index is less than the coupon barrier level for such index(70\% of initial level for each index) with respect to that observation date.
+\item If the securities have not previously been redeemed, investors will receive on the maturity date a payment at maturity determined as follows:
+	\begin{enumerate}
+	\item If the final index value of each underlying index is greater than or equal to its respective downside threshold level: the stated principal amount and the contingent quarterly coupon with respect to the final observation date.
+	\item If the final index value of either underlying index is less than its respective downside threshold level: (i) the stated principal amount multiplied by (ii) the index performance factor of the worst performing underlying index.
+	\end{enumerate}
+\end{enumerate}
+
+\begin{quote}
+{\small\textit{Note:
+\begin{enumerate}
+\item Worst performing underlying index:\\
+      The underlying index with the larger percentage decrease from the respective initial index value to the respective final index value\\
+\item Index performance factor:\\
+      Final index value divided by the initial index value
+\end{enumerate}}}
+\end{quote}
+
+\end{document}
